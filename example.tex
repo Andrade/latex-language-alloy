@@ -1,0 +1,58 @@
+%%
+% Example document using the Alloy language definitions for listings.
+%
+% Usage: import package listings and add the definition alloy.sty
+%        (all the rest is optional)
+%
+% 2017, Daniel Andrade
+% BSD 3-Clause License
+%%
+\documentclass{article}
+\usepackage{listings}
+
+\input{alloy.sty}
+
+% define a style for the alloy language
+\lstdefinestyle{alloy}{
+	commentstyle=\itshape,
+	keywordstyle=\bfseries,
+	stringstyle=\itshape,
+}
+
+% define command for inline use; usage: \alloy|sig A {f: some B}|
+\def\alloy{\lstinline[
+	language=alloy,
+	style=alloy,
+	basicstyle=\ttfamily\small
+]}
+
+\renewcommand{\ttdefault}{pcr}  % font type with bfseries and ttfamily
+% general definitions
+\lstset{
+	basicstyle=\ttfamily\large
+}
+
+\begin{document}
+Hello, the \alloy|sig A {f: some B}| is using the alloy language definition.
+
+\vspace{1.5cm}
+
+\begin{lstlisting}[language=alloy]
+	/* some code using the environment */
+
+	module state
+	open util/ordering[State]
+
+	sig State {
+		f1: set A
+		f2: set B
+		f3: C -> B
+	}
+
+	sig A {
+		f: B
+	}
+	sig B {}
+	sig C {}
+\end{lstlisting}
+\end{document}
